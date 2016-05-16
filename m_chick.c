@@ -734,6 +734,7 @@ void chick_reslash(edict_t *self)
 	if (self->enemy->health > 0)
 	{
 		if (range (self, self->enemy) == RANGE_MELEE)
+        {
 			if (random() <= 0.9)
 			{				
 				self->monsterinfo.currentmove = &chick_move_slash;
@@ -744,6 +745,7 @@ void chick_reslash(edict_t *self)
 				self->monsterinfo.currentmove = &chick_move_end_slash;
 				return;
 			}
+        }
 	}
 	self->monsterinfo.currentmove = &chick_move_end_slash;
 }

@@ -39,10 +39,12 @@ void use_target_steam (edict_t *self, edict_t *other, edict_t *activator)
 	// automagically set wait from func_timer unless they set it already, or
 	// default to 1000 if not called by a func_timer (eek!)
 	if (!self->wait)
+    {
 		if (other)
 			self->wait = other->wait * 1000;
 		else
 			self->wait = 1000;
+    }
 
 	if (self->enemy)
 	{
