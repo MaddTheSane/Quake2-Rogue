@@ -251,8 +251,8 @@ void InitGame (void)
 void WriteField1 (FILE *f, field_t *field, byte *base)
 {
 	void		*p;
-	int			len;
-	int			index;
+	size_t		len;
+	intptr_t	index;
 
 	if (field->flags & FFL_SPAWNTEMP)
 		return;
@@ -273,28 +273,28 @@ void WriteField1 (FILE *f, field_t *field, byte *base)
 			len = strlen(*(char **)p) + 1;
 		else
 			len = 0;
-		*(int *)p = len;
+		*(int *)p = (int)len;
 		break;
 	case F_EDICT:
 		if ( *(edict_t **)p == NULL)
 			index = -1;
 		else
 			index = *(edict_t **)p - g_edicts;
-		*(int *)p = index;
+		*(int *)p = (int)index;
 		break;
 	case F_CLIENT:
 		if ( *(gclient_t **)p == NULL)
 			index = -1;
 		else
 			index = *(gclient_t **)p - game.clients;
-		*(int *)p = index;
+		*(int *)p = (int)index;
 		break;
 	case F_ITEM:
 		if ( *(edict_t **)p == NULL)
 			index = -1;
 		else
 			index = *(gitem_t **)p - itemlist;
-		*(int *)p = index;
+		*(int *)p = (int)index;
 		break;
 
 	//relative to code segment
@@ -303,7 +303,7 @@ void WriteField1 (FILE *f, field_t *field, byte *base)
 			index = 0;
 		else
 			index = *(byte **)p - ((byte *)InitGame);
-		*(int *)p = index;
+		*(int *)p = (int)index;
 		break;
 
 	//relative to data segment
@@ -312,7 +312,7 @@ void WriteField1 (FILE *f, field_t *field, byte *base)
 			index = 0;
 		else
 			index = *(byte **)p - (byte *)&mmove_reloc;
-		*(int *)p = index;
+		*(int *)p = (int)index;
 		break;
 
 	default:
@@ -323,7 +323,7 @@ void WriteField1 (FILE *f, field_t *field, byte *base)
 
 void WriteField2 (FILE *f, field_t *field, byte *base)
 {
-	int			len;
+	size_t		len;
 	void		*p;
 
 	if (field->flags & FFL_SPAWNTEMP)

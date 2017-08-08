@@ -35,8 +35,8 @@ In coop games, sight_client will cycle between the clients.
 */
 void AI_SetSightClient (void)
 {
-	edict_t	*ent;
-	int		start, check;
+	edict_t		*ent;
+	intptr_t	start, check;
 
 	if (level.sight_client == NULL)
 		start = 1;

@@ -510,7 +510,7 @@ void Widow2Tongue (edict_t *self)
 
 	gi.WriteByte (svc_temp_entity);
 	gi.WriteByte (TE_PARASITE_ATTACK);
-	gi.WriteShort (self - g_edicts);
+	gi.WriteShort ((int)(self - g_edicts));
 	gi.WritePosition (start);
 	gi.WritePosition (end);
 	gi.multicast (self->s.origin, MULTICAST_PVS);
@@ -1006,7 +1006,7 @@ qboolean Widow2_CheckAttack (edict_t *self)
 {
 	vec3_t		spot1, spot2;
 	vec3_t		temp;
-	float		chance;
+	float		chance = 0;
 	trace_t		tr;
 	qboolean	enemy_infront;
 	int			enemy_range;

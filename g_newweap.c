@@ -1307,7 +1307,7 @@ void Nuke_Think(edict_t *ent)
 		ent->owner = NULL;
 
 		gi.WriteByte (svc_muzzleflash);
-		gi.WriteShort (ent-g_edicts);
+		gi.WriteShort ((int)(ent-g_edicts));
 		gi.WriteByte (muzzleflash);
 		gi.multicast (ent->s.origin, MULTICAST_PVS);
 
@@ -1534,8 +1534,8 @@ void tesla_think_active (edict_t *self)
 
 			gi.WriteByte (svc_temp_entity);
 			gi.WriteByte (TE_LIGHTNING);
-			gi.WriteShort (hit - g_edicts);			// destination entity
-			gi.WriteShort (self - g_edicts);		// source entity
+			gi.WriteShort ((int)(hit - g_edicts));			// destination entity
+			gi.WriteShort ((int)(self - g_edicts));		// source entity
 			gi.WritePosition (tr.endpos);
 			gi.WritePosition (start);
 			gi.multicast (start, MULTICAST_PVS);
@@ -1862,7 +1862,7 @@ static void fire_beams (edict_t *self, vec3_t start, vec3_t aimdir, vec3_t offse
 	
 	gi.WriteByte (svc_temp_entity);
 	gi.WriteByte (te_beam);
-	gi.WriteShort (self - g_edicts);
+	gi.WriteShort ((int)(self - g_edicts));
 	gi.WritePosition (start);
 	gi.WritePosition (beam_endpt);
 	gi.multicast (self->s.origin, MULTICAST_ALL);
