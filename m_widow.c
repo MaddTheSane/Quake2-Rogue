@@ -32,9 +32,6 @@ static int	sound_pain2;
 static int	sound_pain3;
 static int	sound_search1;
 static int	sound_rail;
-#if !defined (__APPLE__) && !defined (MACOSX)
-static int	sound_sight;
-#endif /* !__APPLE__ && !MACOSX */
 
 static unsigned long shotsfired;
 
@@ -199,9 +196,7 @@ int WidowTorso (edict_t *self)
 	else if (enemy_yaw <= -33.75)
 		return FRAME_fired07;
 */
-#if defined (__APPLE__) || defined (MACOSX)
-        return 0;
-#endif /* __APPLE__ || MACOSX */
+	return 0;
 }
 
 #define	VARIANCE 15.0
@@ -1417,7 +1412,7 @@ qboolean Widow_CheckAttack (edict_t *self)
 {
 	vec3_t	spot1, spot2;
 	vec3_t	temp;
-	float	chance = 0;
+	float	chance = 0.f;
 	trace_t	tr;
 	qboolean	enemy_infront;
 	int			enemy_range;

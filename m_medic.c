@@ -60,13 +60,13 @@ static int	commander_sound_spawn;
 
 char * reinforcements[] = {
 	"monster_soldier_light",	// 0
-	"monster_soldier",			// 1
+	"monster_soldier",		// 1
 	"monster_soldier_ss",		// 2
-	"monster_infantry",			// 3
+	"monster_infantry",		// 3
 	"monster_gunner",			// 4
-//	{"monster_chick"},			// 4
+//	"monster_chick"},			// 4
 	"monster_medic",			// 5
-	"monster_gladiator"			// 6
+	"monster_gladiator"		// 6
 };
 
 vec3_t reinforcement_mins[] = {
@@ -498,12 +498,10 @@ void medic_pain (edict_t *self, edict_t *other, float kick, int damage)
 	monster_done_dodge (self);
 
 	if ((self->health < (self->max_health / 2)))
-    {
 		if (self->mass > 400)
 			self->s.skinnum = 3;
 		else
 			self->s.skinnum = 1;
-    }
 
 	if (level.time < self->pain_debounce_time)
 		return;
@@ -939,14 +937,12 @@ void medic_cable_attack (edict_t *self)
 	}
 	else
 	{
-        if (self->s.frame == FRAME_attack44)
-        {
+		if (self->s.frame == FRAME_attack44)
 			// PMM - medic commander sounds
 			if (self->mass == 400)
 				gi.sound (self, CHAN_WEAPON, sound_hook_heal, 1, ATTN_NORM, 0);
 			else
 				gi.sound (self, CHAN_WEAPON, commander_sound_hook_heal, 1, ATTN_NORM, 0);
-        }
 	}
 
 	// adjust start for beam origin being in middle of a segment
@@ -958,7 +954,7 @@ void medic_cable_attack (edict_t *self)
 
 	gi.WriteByte (svc_temp_entity);
 	gi.WriteByte (TE_MEDIC_CABLE_ATTACK);
-	gi.WriteShort ((int)(self - g_edicts));
+	gi.WriteShort (self - g_edicts);
 	gi.WritePosition (start);
 	gi.WritePosition (end);
 	gi.multicast (self->s.origin, MULTICAST_PVS);
@@ -1160,7 +1156,6 @@ void medic_spawngrows (edict_t *self)
 	int		num_summoned; // should be 1, 3, or 5
 	int		num_success = 0;
 	float	current_yaw;
-	qboolean	behind = false;
 
 	// if we've been directed to turn around
 	if (self->monsterinfo.aiflags & AI_MANUAL_STEERING)

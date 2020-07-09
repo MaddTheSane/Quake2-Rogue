@@ -487,7 +487,7 @@ void GunnerGrenade (edict_t *self)
 	vec3_t	aim;
 	int		flash_number;
 	float	spread;
-	float	pitch = 0;
+	float	pitch = 0.f;
 	// PMM
 	vec3_t	target;	
 	qboolean blindfire = false;
@@ -512,7 +512,7 @@ void GunnerGrenade (edict_t *self)
 	else if (self->s.frame == FRAME_attak111)
 	{
 		spread = .08;
-        flash_number = MZ2_GUNNER_GRENADE_3;
+		flash_number = MZ2_GUNNER_GRENADE_3;
 	}
 	else // (self->s.frame == FRAME_attak114)
 	{

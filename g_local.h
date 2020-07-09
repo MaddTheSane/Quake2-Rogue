@@ -8,6 +8,8 @@
 #define	GAME_INCLUDE
 #include "game.h"
 
+#include <inttypes.h>
+
 // the "gameversion" client command will print this plus compile date
 #define	GAMEVERSION	"baseq2"
 
@@ -22,15 +24,11 @@
 //==================================================================
 
 #ifndef _WIN32
-#if !defined (__APPLE__) && !defined (MACOSX)
-#include <nan.h>
-#endif /* !__APPLE__ && !MACOSX */
+//#include <nan.h>
 #define min(a,b) ((a) < (b) ? (a) : (b))
 #define max(a,b) ((a) > (b) ? (a) : (b))
 #ifdef __sun__
 #define _isnan(a) (NaN((a)))
-#elif defined (__APPLE__) || defined (MACOSX)
-#define _isnan(a) (isnan((a)))
 #else
 #define _isnan(a) ((a)==NAN)
 #endif
@@ -549,13 +547,10 @@ extern	spawn_temp_t	st;
 extern	int	sm_meat_index;
 extern	int	snd_fry;
 
-#if !defined(__APPLE__) && !defined(MACOSX)
-
 extern	int	jacket_armor_index;
 extern	int	combat_armor_index;
 extern	int	body_armor_index;
 
-#endif // !__APPLE__ && !MACOSX
 
 // means of death
 #define MOD_UNKNOWN			0
@@ -620,10 +615,10 @@ extern	int	meansOfDeath;
 
 extern	edict_t			*g_edicts;
 
-#define	FOFS(x) (int)&(((edict_t *)0)->x)
-#define	STOFS(x) (int)&(((spawn_temp_t *)0)->x)
-#define	LLOFS(x) (int)&(((level_locals_t *)0)->x)
-#define	CLOFS(x) (int)&(((gclient_t *)0)->x)
+#define	FOFS(x) (intptr_t)&(((edict_t *)0)->x)
+#define	STOFS(x) (intptr_t)&(((spawn_temp_t *)0)->x)
+#define	LLOFS(x) (intptr_t)&(((level_locals_t *)0)->x)
+#define	CLOFS(x) (intptr_t)&(((gclient_t *)0)->x)
 
 #define random()	((rand () & 0x7fff) / ((float)0x7fff))
 #define crandom()	(2.0 * (random() - 0.5))
@@ -666,6 +661,8 @@ extern	cvar_t	*flood_waitdelay;
 extern	cvar_t	*sv_maplist;
 
 extern	cvar_t	*sv_stopspeed;		// PGM - this was a define in g_phys.c
+
+extern cvar_t   *aimfix;
 
 //ROGUE
 extern	cvar_t	*g_showlogic;
@@ -739,7 +736,7 @@ void InitItems (void);
 void SetItemNames (void);
 gitem_t	*FindItem (char *pickup_name);
 gitem_t	*FindItemByClassname (char *classname);
-#define	ITEM_INDEX(x) ((int)((x)-itemlist))
+#define	ITEM_INDEX(x) ((x)-itemlist)
 edict_t *Drop_Item (edict_t *ent, gitem_t *item);
 void SetRespawn (edict_t *ent, float delay);
 void ChangeWeapon (edict_t *ent);

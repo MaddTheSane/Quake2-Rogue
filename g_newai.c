@@ -497,7 +497,7 @@ qboolean monsterlost_checkhint2 (edict_t *self);
 
 qboolean monsterlost_checkhint (edict_t *self)
 {
-	edict_t		*e, *monster_pathchain, *target_pathchain, *checkpoint;
+	edict_t		*e, *monster_pathchain, *target_pathchain, *checkpoint = NULL;
 	edict_t		*closest;
 	float		closest_range = 1000000;
 	edict_t		*start, *destination;
@@ -1992,9 +1992,8 @@ qboolean monster_jump_finished (edict_t *self)
 //		}
 		return true;
 	}
-#if defined (__APPLE__) || defined (MACOSX)
-        return (false);
-#endif /* __APPLE__ ||ÊMACOSX */
+
+	return false;
 }
 
 
