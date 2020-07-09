@@ -937,12 +937,14 @@ void medic_cable_attack (edict_t *self)
 	}
 	else
 	{
-		if (self->s.frame == FRAME_attack44)
+		if (self->s.frame == FRAME_attack44) {
 			// PMM - medic commander sounds
-			if (self->mass == 400)
+			if (self->mass == 400) {
 				gi.sound (self, CHAN_WEAPON, sound_hook_heal, 1, ATTN_NORM, 0);
-			else
+			} else {
 				gi.sound (self, CHAN_WEAPON, commander_sound_hook_heal, 1, ATTN_NORM, 0);
+			}
+		}
 	}
 
 	// adjust start for beam origin being in middle of a segment

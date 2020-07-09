@@ -564,7 +564,7 @@ void makron_pain (edict_t *self, edict_t *other, float kick, int damage)
 	}
 	else
 	{
-		if (damage <= 150)
+		if (damage <= 150) {
 			if (random() <= 0.45)
 			{
 				gi.sound (self, CHAN_VOICE, sound_pain6, 1, ATTN_NONE,0);
@@ -576,6 +576,7 @@ void makron_pain (edict_t *self, edict_t *other, float kick, int damage)
 				gi.sound (self, CHAN_VOICE, sound_pain6, 1, ATTN_NONE,0);
 				self->monsterinfo.currentmove = &makron_move_pain6;
 			}
+		}
 	}
 };
 
